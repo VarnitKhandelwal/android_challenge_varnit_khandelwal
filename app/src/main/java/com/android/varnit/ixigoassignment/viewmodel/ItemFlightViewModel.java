@@ -12,13 +12,13 @@ import java.util.HashMap;
 
 public class ItemFlightViewModel extends BaseObservable {
 
-    public final ObservableField<String> departureCity;
-    public final ObservableField<String> arrivalCity;
-    public final ObservableField<String> departureTime;
-    public final ObservableField<String> arrivalTime;
-    public final ObservableField<String> flightFare;
-    public final ObservableField<String> providerName;
-    public final ObservableField<String> flightDuration;
+    public ObservableField<String> departureCity;
+    public ObservableField<String> arrivalCity;
+    public ObservableField<String> departureTime;
+    public ObservableField<String> arrivalTime;
+    public ObservableField<String> flightFare;
+    public ObservableField<String> providerName;
+    public ObservableField<String> flightDuration;
     private Context context;
     private FlightsData flightsData;
 
@@ -43,8 +43,18 @@ public class ItemFlightViewModel extends BaseObservable {
         return dateFormatted; //note that it will give you the time in GMT+0
     }
 
-    public void setFlightsData(FlightsData flightsData) {
+    public void setFlightsData(FlightsData flightsData, HashMap<String, Object> providerMapData) {
         this.flightsData = flightsData;
+        departureCity = new ObservableField<>(flightsData.getOriginCode());
+        arrivalCity = new ObservableField<>(flightsData.getDestinationCode());
+        departureTime = new ObservableField<>(millsToDateFormat(flightsData.getDepartureTime()));
+        arrivalTime = new ObservableField<>(millsToDateFormat(flightsData.getArrivalTime()));
+        flightFare = new ObservableField<>("₹ " + flightsData.getFares().get(0).getFare());
+        if (providerMapData != null)
+            providerName = new ObservableField<>(String.valueOf(providerMapData.get(flightsData.getFares().get(0).getProviderId())));
+        else
+            providerName = new ObservableField<>();
+        flightDuration = new ObservableField<>(millsToDateFormat(flightsData.getArrivalTime() - flightsData.getDepartureTime()) + " (Duration)");
         notifyChange();
     }
 }

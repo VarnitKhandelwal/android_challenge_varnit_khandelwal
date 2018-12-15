@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements Observer {
                                     public int compare(FlightsData o1, FlightsData o2) {
                                         Long c1 = o1.getDepartureTime();
                                         Long c2 = o2.getDepartureTime();
-                                        return -1 * c1.compareTo(c2);
+                                        return c1.compareTo(c2);
                                     }
                                 });
                                 itemListAdapter.notifyDataSetChanged();
@@ -101,9 +101,9 @@ public class MainActivity extends AppCompatActivity implements Observer {
                                 Collections.sort(mainViewModel.getFlightsDataList(), new Comparator<FlightsData>() {
                                     @Override
                                     public int compare(FlightsData o1, FlightsData o2) {
-                                        Long c1 = o1.getDepartureTime();
-                                        Long c2 = o2.getDepartureTime();
-                                        return -1 * c1.compareTo(c2);
+                                        Long c1 = o1.getArrivalTime();
+                                        Long c2 = o2.getArrivalTime();
+                                        return c1.compareTo(c2);
                                     }
                                 });
                                 itemListAdapter.notifyDataSetChanged();

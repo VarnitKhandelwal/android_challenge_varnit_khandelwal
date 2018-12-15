@@ -71,7 +71,7 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ViewHo
                 itemLayoutBinding.setImageViewModel(
                         new ItemFlightViewModel(flightsData, providerMapData));
             } else {
-                itemLayoutBinding.getImageViewModel().setFlightsData(flightsData);
+                itemLayoutBinding.getImageViewModel().setFlightsData(flightsData, providerMapData);
             }
         }
     }

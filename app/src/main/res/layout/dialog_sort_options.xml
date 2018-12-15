@@ -65,7 +65,7 @@
             android:paddingBottom="10dp"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:text="Departure Time - Late to Early"
+            android:text="Arrival Time - Early to Late"
             app:buttonTint="@color/colorPrimary" />
 
     </RadioGroup>
