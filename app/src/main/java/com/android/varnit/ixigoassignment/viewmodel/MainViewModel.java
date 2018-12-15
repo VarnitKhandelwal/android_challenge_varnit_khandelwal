@@ -27,6 +27,7 @@ public class MainViewModel extends Observable implements NetworkChangeReceiver.N
 
     public ObservableInt progressBarVisibility;
     public ObservableInt recyclerViewVisibility;
+    public ObservableInt sortVisibility;
     public ObservableInt noInternetVisibility;
     public CompositeDisposable compositeDisposable = new CompositeDisposable();
     private List<FlightsData> flightsDataList;
@@ -40,6 +41,7 @@ public class MainViewModel extends Observable implements NetworkChangeReceiver.N
         progressBarVisibility = new ObservableInt(View.GONE);
         recyclerViewVisibility = new ObservableInt(View.GONE);
         noInternetVisibility = new ObservableInt(View.GONE);
+        sortVisibility = new ObservableInt(View.GONE);
 
         // Add Network Listener
         networkChangeReceiver = new NetworkChangeReceiver();
@@ -52,6 +54,7 @@ public class MainViewModel extends Observable implements NetworkChangeReceiver.N
 
     public void initializeViews() {
         recyclerViewVisibility.set(View.GONE);
+        sortVisibility.set(View.GONE);
     }
 
     public void fetchFlightsList() {
@@ -69,10 +72,12 @@ public class MainViewModel extends Observable implements NetworkChangeReceiver.N
                         @Override
                         public void accept(FlightsResponse flightsResponse) throws Exception {
                             appendixData = flightsResponse.getAppendix();
-                            changeFlightsDataSet(flightsResponse.getFlights());
+                            flightsDataList.addAll(flightsResponse.getFlights());
+                            changeFlightsDataSet();
                             progressBarVisibility.set(View.GONE);
                             noInternetVisibility.set(View.GONE);
                             recyclerViewVisibility.set(View.VISIBLE);
+                            sortVisibility.set(View.VISIBLE);
                         }
                     }, new Consumer<Throwable>() {
                         @Override
@@ -81,6 +86,7 @@ public class MainViewModel extends Observable implements NetworkChangeReceiver.N
                             noInternetVisibility.set(View.VISIBLE);
                             if (flightsDataList == null || flightsDataList.size() == 0)
                                 recyclerViewVisibility.set(View.GONE);
+                            sortVisibility.set(View.GONE);
                         }
                     });
 
@@ -88,13 +94,13 @@ public class MainViewModel extends Observable implements NetworkChangeReceiver.N
         } else {
             progressBarVisibility.set(View.GONE);
             recyclerViewVisibility.set(View.GONE);
+            sortVisibility.set(View.GONE);
             if (flightsDataList == null || flightsDataList.size() == 0)
                 noInternetVisibility.set(View.VISIBLE);
         }
     }
 
-    public void changeFlightsDataSet(List<FlightsData> flightsDataList) {
-        this.flightsDataList.addAll(flightsDataList);
+    public void changeFlightsDataSet() {
         setChanged();
         notifyObservers();
     }
@@ -141,6 +147,7 @@ public class MainViewModel extends Observable implements NetworkChangeReceiver.N
         progressBarVisibility.set(View.GONE);
         if (flightsDataList == null || flightsDataList.size() == 0) {
             recyclerViewVisibility.set(View.GONE);
+            sortVisibility.set(View.GONE);
             noInternetVisibility.set(View.VISIBLE);
         }
     }
