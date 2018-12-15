@@ -14,12 +14,9 @@
         android:id="@+id/item_view_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="4dp"
-        app:cardUseCompatPadding="true"
         app:cardCornerRadius="2dp"
-        android:orientation="vertical"
-        app:cardElevation="4dp">
+        app:cardElevation="2dp"
+        app:cardUseCompatPadding="true">
 
         <LinearLayout
             android:id="@+id/item_flight"
@@ -154,8 +151,8 @@
                     android:gravity="end"
                     android:text="@{imageViewModel.flightFare}"
                     android:textColor="@android:color/black"
-                    android:textStyle="bold"
                     android:textSize="20sp"
+                    android:textStyle="bold"
                     tools:text="₹ 6500" />
             </LinearLayout>
         </LinearLayout>

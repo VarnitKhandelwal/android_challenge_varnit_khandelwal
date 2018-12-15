@@ -4,7 +4,6 @@ import android.app.Dialog;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -119,7 +118,6 @@ public class MainActivity extends AppCompatActivity implements Observer {
     private void setupFlightsList(RecyclerView flightsRecyclerView) {
         itemListAdapter = new ItemListAdapter();
         flightsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        flightsRecyclerView.addItemDecoration(new DividerItemDecoration(MainActivity.this, DividerItemDecoration.VERTICAL));
         flightsRecyclerView.setAdapter(itemListAdapter);
     }
 
