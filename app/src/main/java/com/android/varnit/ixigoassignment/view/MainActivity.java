@@ -51,10 +51,6 @@ public class MainActivity extends AppCompatActivity implements Observer {
                 RadioGroup options = (RadioGroup) d.findViewById(R.id.options);
                 options.check(currentSortOrderBy);
                 options.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-                    {
-
-                    }
-
                     @Override
                     public void onCheckedChanged(RadioGroup group, int checkedId) {
 
